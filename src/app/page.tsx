@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Sparkles, 
-  Brain, 
   Activity, 
   BookOpen, 
   MessageSquare, 
@@ -307,6 +306,9 @@ export default function LandingPage() {
             >
               <button
                 onClick={() => setActiveFaq(activeFaq === i ? null : i)}
+                aria-expanded={activeFaq === i}
+                aria-controls={`faq-answer-${i}`}
+                id={`faq-btn-${i}`}
                 className="w-full px-5 py-4 text-left flex items-center justify-between text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-all"
               >
                 <span className="font-bold text-sm md:text-base font-display">{faq.q}</span>
@@ -314,7 +316,12 @@ export default function LandingPage() {
               </button>
               
               {activeFaq === i && (
-                <div className="px-5 pb-5 pt-1 text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed border-t border-slate-100 dark:border-slate-900">
+                <div 
+                  id={`faq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-btn-${i}`}
+                  className="px-5 pb-5 pt-1 text-slate-500 dark:text-slate-400 text-xs md:text-sm leading-relaxed border-t border-slate-100 dark:border-slate-900"
+                >
                   {faq.a}
                 </div>
               )}

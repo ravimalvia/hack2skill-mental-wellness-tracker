@@ -2,17 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  BarChart2, 
-  Smile, 
-  Activity, 
-  Moon, 
-  Sparkles, 
-  Flame,
-  AlertCircle,
-  HelpCircle,
-  Play
+  Sparkles
 } from 'lucide-react';
-import { MindMateDB, DailyEntry, UserProfile, MoodType } from '../../utils/db';
+import { MindMateDB, DailyEntry, MoodType } from '../../utils/db';
 
 const MOOD_COLORS: Record<MoodType, { bg: string; label: string; emoji: string }> = {
   excellent: { bg: 'bg-green-500/20 border-green-500/30 text-green-700', label: 'Excellent', emoji: '😊' },
@@ -25,7 +17,6 @@ const MOOD_COLORS: Record<MoodType, { bg: string; label: string; emoji: string }
 
 export default function Analytics() {
   const [entries, setEntries] = useState<DailyEntry[]>([]);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
   
   // Averages states
   const [avgStress, setAvgStress] = useState(0);
@@ -35,8 +26,6 @@ export default function Analytics() {
   const [riskTier, setRiskTier] = useState<'Low' | 'Moderate' | 'High' | 'Critical'>('Low');
 
   useEffect(() => {
-    const prof = MindMateDB.getProfile();
-    setProfile(prof);
 
     const loggedEntries = MindMateDB.getDailyEntries();
     setEntries(loggedEntries);

@@ -5,11 +5,7 @@ import {
   ShieldCheck, 
   Users, 
   Heart, 
-  Clock, 
-  AlertCircle,
   EyeOff,
-  Activity,
-  BarChart2,
   Sparkles
 } from 'lucide-react';
 import { MindMateDB, DailyEntry, UserProfile } from '../../utils/db';
@@ -100,8 +96,16 @@ export default function Dashboards() {
       </div>
 
       {/* Primary tab swapper */}
-      <div className="bg-white dark:bg-[#121824] p-1.5 border border-slate-200/40 dark:border-slate-800/80 rounded-2xl shadow-sm flex gap-2 w-full max-w-md self-center md:self-start">
+      <div 
+        role="tablist"
+        aria-label="Simulated Portal Selector"
+        className="bg-white dark:bg-[#121824] p-1.5 border border-slate-200/40 dark:border-slate-800/80 rounded-2xl shadow-sm flex gap-2 w-full max-w-md self-center md:self-start"
+      >
         <button
+          role="tab"
+          id="parent-portal-tab"
+          aria-selected={activeTab === 'parent'}
+          aria-controls="parent-portal-panel"
           onClick={() => setActiveTab('parent')}
           className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all
             ${activeTab === 'parent' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-850'}
@@ -111,6 +115,10 @@ export default function Dashboards() {
         </button>
         
         <button
+          role="tab"
+          id="teacher-portal-tab"
+          aria-selected={activeTab === 'teacher'}
+          aria-controls="teacher-portal-panel"
           onClick={() => setActiveTab('teacher')}
           className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all
             ${activeTab === 'teacher' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-850'}
@@ -122,7 +130,12 @@ export default function Dashboards() {
 
       {/* PARENT DASHBOARD PORTAL */}
       {activeTab === 'parent' && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fadeIn">
+        <div 
+          id="parent-portal-panel"
+          role="tabpanel"
+          aria-labelledby="parent-portal-tab"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fadeIn"
+        >
           
           {/* Main parent analytics column */}
           <div className="lg:col-span-2 flex flex-col gap-6">
@@ -198,7 +211,12 @@ export default function Dashboards() {
 
       {/* TEACHER DASHBOARD PORTAL */}
       {activeTab === 'teacher' && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fadeIn">
+        <div 
+          id="teacher-portal-panel"
+          role="tabpanel"
+          aria-labelledby="teacher-portal-tab"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fadeIn"
+        >
           
           {/* Main classroom statistics */}
           <div className="lg:col-span-2 flex flex-col gap-6">

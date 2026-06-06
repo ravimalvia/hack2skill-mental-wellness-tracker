@@ -2,15 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  GraduationCap, 
-  Clock, 
-  CheckCircle2, 
-  AlertCircle, 
-  HelpCircle, 
-  Sparkles,
-  Heart,
-  TrendingUp,
-  Smile
+  AlertCircle
 } from 'lucide-react';
 import { MindMateDB, UserProfile } from '../../utils/db';
 
@@ -218,6 +210,8 @@ export default function ExamMode() {
                 <button
                   key={c.id}
                   type="button"
+                  role="checkbox"
+                  aria-checked={isChecked}
                   onClick={() => handleChecklistToggle(c.id)}
                   className={`
                     p-3.5 rounded-xl border text-left flex items-start gap-3 transition-all
@@ -243,14 +237,26 @@ export default function ExamMode() {
         <div className="lg:col-span-1 p-6 bg-white dark:bg-[#121824] border border-slate-200/40 dark:border-slate-800/80 rounded-2xl shadow-sm flex flex-col gap-4">
           
           {/* Double Tab Toggler */}
-          <div className="bg-slate-100 dark:bg-slate-900/60 p-1.5 border border-slate-200/50 dark:border-slate-800/80 rounded-xl grid grid-cols-2 text-center text-xs font-bold select-none mb-1">
+          <div 
+            role="tablist"
+            aria-label="Result Phases"
+            className="bg-slate-100 dark:bg-slate-900/60 p-1.5 border border-slate-200/50 dark:border-slate-800/80 rounded-xl grid grid-cols-2 text-center text-xs font-bold select-none mb-1"
+          >
             <button
+              role="tab"
+              id="before-results-tab"
+              aria-selected={resultPhase === 'before'}
+              aria-controls="before-results-panel"
               onClick={() => setResultPhase('before')}
               className={`py-1.5 rounded-lg transition-all ${resultPhase === 'before' ? 'bg-white dark:bg-slate-850 text-indigo-500 shadow-sm' : 'text-slate-400'}`}
             >
               Anxiety Management
             </button>
             <button
+              role="tab"
+              id="after-results-tab"
+              aria-selected={resultPhase === 'after'}
+              aria-controls="after-results-panel"
               onClick={() => setResultPhase('after')}
               className={`py-1.5 rounded-lg transition-all ${resultPhase === 'after' ? 'bg-white dark:bg-slate-850 text-indigo-500 shadow-sm' : 'text-slate-400'}`}
             >
@@ -260,7 +266,12 @@ export default function ExamMode() {
 
           {/* Tab 1 Content: Before Results */}
           {resultPhase === 'before' && (
-            <div className="flex flex-col gap-4 text-xs animate-fadeIn leading-relaxed">
+            <div 
+              id="before-results-panel"
+              role="tabpanel"
+              aria-labelledby="before-results-tab"
+              className="flex flex-col gap-4 text-xs animate-fadeIn leading-relaxed"
+            >
               <div className="p-3.5 bg-indigo-500/5 dark:bg-indigo-950/20 border border-indigo-500/10 rounded-xl flex items-start gap-2.5">
                 <AlertCircle className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
                 <span className="text-slate-500 dark:text-slate-350">
@@ -281,7 +292,12 @@ export default function ExamMode() {
 
           {/* Tab 2 Content: After Results */}
           {resultPhase === 'after' && (
-            <div className="flex flex-col gap-4 text-xs animate-fadeIn">
+            <div 
+              id="after-results-panel"
+              role="tabpanel"
+              aria-labelledby="after-results-tab"
+              className="flex flex-col gap-4 text-xs animate-fadeIn"
+            >
               
               {/* Outcome Selector */}
               <div className="flex flex-col gap-2">

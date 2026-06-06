@@ -3,21 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { 
-  Sparkles, 
-  Flame, 
-  Calendar, 
-  BookOpen, 
-  Heart, 
-  Clock, 
-  TrendingUp, 
-  AlertTriangle,
   Award,
   ChevronRight,
-  Smile,
-  Activity,
   CheckSquare
 } from 'lucide-react';
-import { MindMateDB, DailyEntry, JournalEntry, UserProfile, ALL_BADGES } from '../../utils/db';
+import { MindMateDB, DailyEntry, UserProfile, ALL_BADGES } from '../../utils/db';
 import { SentimentAnalyzer } from '../../utils/sentiment';
 import DailyCheckin from '../../components/DailyCheckin';
 
@@ -429,10 +419,12 @@ export default function Dashboard() {
 
             <form onSubmit={handleQuickJournalSubmit} className="flex flex-col gap-3">
               <textarea
+                id="quick-journal-textarea"
+                aria-label="Quick Emotional Journal Entry"
                 placeholder="How was study today? Vent freely here... (e.g. 'Struggled with physical chemistry mock problems, feeling lost...')"
                 value={quickJournalText}
                 onChange={(e) => setQuickJournalText(e.target.value)}
-                className="w-full h-20 p-3.5 text-xs rounded-xl border border-slate-200 dark:border-slate-850 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-all resize-none"
+                className="w-full h-20 p-3.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-all resize-none"
               />
               <div className="flex justify-between items-center">
                 <span className="text-[10px] text-slate-400">Text analysis scans for triggers & anxiety levels.</span>

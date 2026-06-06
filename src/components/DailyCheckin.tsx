@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X, ArrowRight, ArrowLeft, CheckCircle2, AlertTriangle, Sparkles } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, CheckCircle2, Sparkles } from 'lucide-react';
 import { MindMateDB, DailyEntry, MoodType, UserProfile } from '../utils/db';
 
 interface DailyCheckinProps {
@@ -134,6 +134,7 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
                     <button
                       key={m.type}
                       type="button"
+                      aria-pressed={mood === m.type}
                       onClick={() => setMood(m.type)}
                       className={`
                         p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all text-center group
@@ -156,13 +157,14 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
 
               {/* Stress Slider */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <label htmlFor="checkin-stress-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                   <span>Stress Level</span>
                   <span className={`px-2 py-0.5 rounded text-[10px] ${stress > 7 ? 'bg-red-100 text-red-600 dark:bg-red-950/50 dark:text-red-400' : stress > 4 ? 'bg-amber-100 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400' : 'bg-green-100 text-green-600 dark:bg-green-950/50 dark:text-green-400'}`}>
                     {stress}/10 — {stress > 7 ? 'Severe Risk' : stress > 4 ? 'Moderate Stress' : 'Relaxed'}
                   </span>
-                </div>
+                </label>
                 <input
+                  id="checkin-stress-range"
                   type="range"
                   min="1"
                   max="10"
@@ -180,11 +182,12 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
               {/* Motivation & Energy Sliders */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  <label htmlFor="checkin-energy-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                     <span>Energy Level</span>
                     <span className="font-bold text-indigo-500">{energy}/10</span>
-                  </div>
+                  </label>
                   <input
+                    id="checkin-energy-range"
                     type="range"
                     min="1"
                     max="10"
@@ -195,11 +198,12 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  <label htmlFor="checkin-motivation-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                     <span>Motivation</span>
                     <span className="font-bold text-indigo-500">{motivation}/10</span>
-                  </div>
+                  </label>
                   <input
+                    id="checkin-motivation-range"
                     type="range"
                     min="1"
                     max="10"
@@ -219,13 +223,14 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
               
               {/* Study hours slider */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <label htmlFor="checkin-study-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                   <span>Daily Study Hours</span>
                   <span className={`px-2 py-0.5 rounded text-[10px] ${studyHours > 10 ? 'bg-amber-100 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400' : 'bg-indigo-500/10 text-indigo-500'}`}>
                     {studyHours} Hours
                   </span>
-                </div>
+                </label>
                 <input
+                  id="checkin-study-range"
                   type="range"
                   min="0"
                   max="16"
@@ -243,13 +248,14 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
 
               {/* Sleep hours slider */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <label htmlFor="checkin-sleep-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                   <span>Sleep Duration</span>
-                  <span className={`px-2 py-0.5 rounded text-[10px] ${sleep < 6 ? 'bg-red-105 text-red-600 dark:bg-red-950/50 dark:text-red-400' : 'bg-green-100 text-green-600 dark:bg-green-950/50 dark:text-green-400'}`}>
+                  <span className={`px-2 py-0.5 rounded text-[10px] ${sleep < 6 ? 'bg-red-100 text-red-600 dark:bg-red-950/50 dark:text-red-400' : 'bg-green-100 text-green-600 dark:bg-green-950/50 dark:text-green-400'}`}>
                     {sleep} Hours
                   </span>
-                </div>
+                </label>
                 <input
+                  id="checkin-sleep-range"
                   type="range"
                   min="0"
                   max="12"
@@ -267,11 +273,12 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
 
               {/* Digital screen time slider */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <label htmlFor="checkin-screen-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                   <span>Digital Screen Time (Non-Study)</span>
                   <span className="font-bold text-indigo-500">{screenTime} Hours</span>
-                </div>
+                </label>
                 <input
+                  id="checkin-screen-range"
                   type="range"
                   min="0"
                   max="12"
@@ -298,6 +305,8 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
               <div className="grid grid-cols-2 gap-4">
                 <button
                   type="button"
+                  role="checkbox"
+                  aria-checked={exercise}
                   onClick={() => setExercise(!exercise)}
                   className={`
                     p-4 rounded-xl border flex flex-col items-start gap-1 text-left transition-all
@@ -314,6 +323,8 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
 
                 <button
                   type="button"
+                  role="checkbox"
+                  aria-checked={social}
                   onClick={() => setSocial(!social)}
                   className={`
                     p-4 rounded-xl border flex flex-col items-start gap-1 text-left transition-all
@@ -331,11 +342,12 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
 
               {/* Water intake slider */}
               <div className="flex flex-col gap-2">
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                <label htmlFor="checkin-water-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                   <span>Water Intake</span>
                   <span className="font-bold text-indigo-500">{(water / 1000).toFixed(1)} Liters ({Math.round(water / 250)} Cups)</span>
-                </div>
+                </label>
                 <input
+                  id="checkin-water-range"
                   type="range"
                   min="0"
                   max="4000"
@@ -349,11 +361,12 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
               {/* Confidence & Self Rating sliders */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-2">
-                  <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  <label htmlFor="checkin-confidence-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                     <span>Preparation Confidence</span>
                     <span className="font-bold text-indigo-500">{confidence}/10</span>
-                  </div>
+                  </label>
                   <input
+                    id="checkin-confidence-range"
                     type="range"
                     min="1"
                     max="10"
@@ -364,11 +377,12 @@ export default function DailyCheckin({ onClose }: DailyCheckinProps) {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <div className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  <label htmlFor="checkin-rating-range" className="flex justify-between text-xs font-bold text-slate-500 uppercase tracking-wider cursor-pointer">
                     <span>Overall Self Rating</span>
                     <span className="font-bold text-indigo-500">{selfRating}/10</span>
-                  </div>
+                  </label>
                   <input
+                    id="checkin-rating-range"
                     type="range"
                     min="1"
                     max="10"

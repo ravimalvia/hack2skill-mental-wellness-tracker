@@ -155,14 +155,11 @@ export class MindMateDB {
       const todayStr = new Date().toISOString().split('T')[0];
       const yesterdayStr = new Date(Date.now() - 86400000).toISOString().split('T')[0];
       
-      let streakUpdated = false;
       if (entry.date === todayStr) {
         if (data.profile.lastActiveDate === yesterdayStr) {
           data.profile.streak += 1;
-          streakUpdated = true;
         } else if (data.profile.lastActiveDate !== todayStr) {
           data.profile.streak = 1;
-          streakUpdated = true;
         }
         data.profile.lastActiveDate = todayStr;
       }

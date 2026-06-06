@@ -2,12 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  MessageSquare, 
   Send, 
-  Sparkles, 
-  AlertTriangle, 
   Info,
-  Clock,
   RotateCcw
 } from 'lucide-react';
 import { MindMateDB, UserProfile } from '../../utils/db';
@@ -133,6 +129,7 @@ How are you holding up today? What has been on your mind?`
             onClick={handleResetChat}
             className="p-1.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-450 hover:text-slate-800 transition-all flex items-center gap-1 text-[10px] font-bold"
             title="Reset Chat"
+            aria-label="Reset chat history"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset
           </button>
@@ -208,6 +205,8 @@ How are you holding up today? What has been on your mind?`
             className="flex items-center gap-2"
           >
             <input
+              id="coach-chat-input"
+              aria-label="Type message to wellness coach"
               type="text"
               required
               disabled={isTyping}
@@ -219,6 +218,7 @@ How are you holding up today? What has been on your mind?`
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
+              aria-label="Send message to wellness coach"
               className={`
                 p-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-md transition-all flex items-center justify-center shrink-0
                 ${(!inputValue.trim() || isTyping) ? 'opacity-40 cursor-not-allowed' : 'active:scale-95'}

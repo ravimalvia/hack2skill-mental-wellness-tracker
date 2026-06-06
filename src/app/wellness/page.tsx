@@ -2,19 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Award, 
   Clock, 
   Wind, 
-  CheckCircle2, 
   Play, 
   Pause, 
-  RotateCcw,
-  Sparkles,
-  Info,
-  Droplet,
-  Moon,
-  Activity,
-  Smile
+  RotateCcw
 } from 'lucide-react';
 import { MindMateDB, UserProfile, HabitLog } from '../../utils/db';
 
@@ -106,47 +98,7 @@ export default function WellnessHub() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  // --- Breathing Code ---
-  useEffect(() => {
-    if (breatheState !== 'idle') {
-      // Session timer
-      breatheSessionIntervalRef.current = setInterval(() => {
-        setBreatheTimer((t) => {
-          if (t <= 1) {
-            handleStopBreathing(true);
-            return 0;
-          }
-          return t - 1;
-        });
-      }, 1000);
-
-      // Loop for box breathing: 4s inhale, 4s hold, 4s exhale, 4s hold
-      breatheIntervalRef.current = setInterval(() => {
-        setBreatheCounter((count) => {
-          if (count <= 1) {
-            // Transition state
-            setBreatheState((current) => {
-              switch (current) {
-                case 'inhale': return 'hold-in';
-                case 'hold-in': return 'exhale';
-                case 'exhale': return 'hold-out';
-                case 'hold-out': return 'inhale';
-                default: return 'idle';
-              }
-            });
-            return 4; // Reset state counter
-          }
-          return count - 1;
-        });
-      }, 1000);
-    }
-
-    return () => {
-      if (breatheIntervalRef.current) clearInterval(breatheIntervalRef.current);
-      if (breatheSessionIntervalRef.current) clearInterval(breatheSessionIntervalRef.current);
-    };
-  }, [breatheState]);
-
+  // --- Breathing Helpers ---
   const handleStartBreathing = () => {
     setBreatheState('inhale');
     setBreatheTimer(120); // 2 minutes
@@ -196,6 +148,47 @@ export default function WellnessHub() {
     const s = breatheTimer % 60;
     return `${m}:${s.toString().padStart(2, '0')}`;
   };
+
+  // --- Breathing Code ---
+  useEffect(() => {
+    if (breatheState !== 'idle') {
+      // Session timer
+      breatheSessionIntervalRef.current = setInterval(() => {
+        setBreatheTimer((t) => {
+          if (t <= 1) {
+            handleStopBreathing(true);
+            return 0;
+          }
+          return t - 1;
+        });
+      }, 1000);
+
+      // Loop for box breathing: 4s inhale, 4s hold, 4s exhale, 4s hold
+      breatheIntervalRef.current = setInterval(() => {
+        setBreatheCounter((count) => {
+          if (count <= 1) {
+            // Transition state
+            setBreatheState((current) => {
+              switch (current) {
+                case 'inhale': return 'hold-in';
+                case 'hold-in': return 'exhale';
+                case 'exhale': return 'hold-out';
+                case 'hold-out': return 'inhale';
+                default: return 'idle';
+              }
+            });
+            return 4; // Reset state counter
+          }
+          return count - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (breatheIntervalRef.current) clearInterval(breatheIntervalRef.current);
+      if (breatheSessionIntervalRef.current) clearInterval(breatheSessionIntervalRef.current);
+    };
+  }, [breatheState]);
 
   // --- Habits toggles ---
   const handleHabitToggle = (id: string, name: string) => {
@@ -337,6 +330,7 @@ export default function WellnessHub() {
 
                 <button
                   onClick={handlePomoReset}
+                  aria-label="Reset focus timer"
                   className="p-2.5 bg-slate-200 dark:bg-slate-850 hover:bg-slate-300 rounded-xl text-slate-600 dark:text-slate-350 transition-all border border-slate-250 dark:border-slate-800"
                   title="Reset timer"
                 >
@@ -364,6 +358,8 @@ export default function WellnessHub() {
               <button
                 key={h.id}
                 type="button"
+                role="checkbox"
+                aria-checked={isCompleted}
                 onClick={() => handleHabitToggle(h.id, h.name)}
                 className={`
                   p-3.5 rounded-xl border text-left flex items-start gap-3 transition-all group

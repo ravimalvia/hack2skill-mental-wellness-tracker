@@ -2,14 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  BookOpen, 
   Search, 
-  Tag, 
   Sparkles, 
-  AlertTriangle, 
   Trash2, 
   Calendar,
-  Smile,
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
@@ -178,11 +174,13 @@ export default function Journal() {
 
           <form onSubmit={handleJournalSubmit} className="flex flex-col gap-3">
             <textarea
+              id="journal-content-textarea"
+              aria-label="AI Emotional Journal Content"
               required
               value={contentText}
               onChange={(e) => setContentText(e.target.value)}
               placeholder="Start typing your feelings here... (e.g. 'I could not solve physics Mock problems today. I got lower marks than my peers and I feel so anxious. My parents have high expectations...')"
-              className="w-full h-44 p-4 text-sm rounded-xl border border-slate-200 dark:border-slate-850 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-all resize-none leading-relaxed"
+              className="w-full h-44 p-4 text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-all resize-none leading-relaxed"
             />
             
             <div className="flex justify-between items-center">
@@ -343,6 +341,7 @@ export default function Journal() {
                       </div>
                       <button
                         onClick={() => handleJournalDelete(j.id)}
+                        aria-label="Delete journal entry"
                         className="p-1 hover:bg-red-50 dark:hover:bg-red-950/20 text-slate-400 hover:text-red-500 rounded transition-all"
                         title="Delete journal"
                       >

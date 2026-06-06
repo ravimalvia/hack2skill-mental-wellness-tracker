@@ -14,15 +14,13 @@ import {
   Settings, 
   Menu, 
   X, 
-  Sun, 
-  Moon, 
   User, 
   Sparkles,
   RefreshCw,
   Eye,
   GraduationCap
 } from 'lucide-react';
-import { MindMateDB, UserProfile, ALL_BADGES } from '../utils/db';
+import { MindMateDB, UserProfile } from '../utils/db';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -160,8 +158,9 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
           <form onSubmit={handleOnboarding} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Your Name</label>
+              <label htmlFor="onboard-name-input" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Your Name</label>
               <input
+                id="onboard-name-input"
                 type="text"
                 required
                 placeholder="e.g. Rahul Sharma"
@@ -172,8 +171,9 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Target Exam</label>
+              <label htmlFor="onboard-exam-select" className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Target Exam</label>
               <select
+                id="onboard-exam-select"
                 value={onboardExam}
                 onChange={(e) => setOnboardExam(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
@@ -217,12 +217,18 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
         <div className="flex items-center gap-3">
           <button 
             onClick={() => setShowEmergency(true)}
+            aria-label="Emergency Support"
             className="p-1.5 bg-red-100 dark:bg-red-950/50 text-red-500 dark:text-red-400 rounded-lg animate-pulse"
             title="Emergency Support"
           >
             <AlertTriangle className="w-5 h-5" />
           </button>
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-1 text-slate-500 focus:outline-none">
+          <button 
+            onClick={() => setSidebarOpen(!sidebarOpen)} 
+            aria-label="Toggle navigation menu"
+            aria-expanded={sidebarOpen}
+            className="p-1 text-slate-500 focus:outline-none"
+          >
             {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -368,7 +374,11 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
                 <AlertTriangle className="w-6 h-6 animate-bounce" />
                 <h3 className="text-xl font-bold font-display">Crisis Support & Grounding</h3>
               </div>
-              <button onClick={() => setShowEmergency(false)} className="p-1 rounded-lg hover:bg-white/20 transition-all">
+              <button 
+                onClick={() => setShowEmergency(false)} 
+                aria-label="Close emergency support dialog"
+                className="p-1 rounded-lg hover:bg-white/20 transition-all"
+              >
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -457,6 +467,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               <button 
                 type="button"
                 onClick={() => setShowSettings(false)} 
+                aria-label="Close settings dialog"
                 className="p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 transition-all"
               >
                 <X className="w-5 h-5" />
@@ -472,8 +483,9 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Gemini API Key</label>
+                <label htmlFor="settings-gemini-key" className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Gemini API Key</label>
                 <input
+                  id="settings-gemini-key"
                   type="password"
                   placeholder="AIzaSy..."
                   value={geminiKey}
@@ -483,8 +495,9 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">OpenAI API Key</label>
+                <label htmlFor="settings-openai-key" className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">OpenAI API Key</label>
                 <input
+                  id="settings-openai-key"
                   type="password"
                   placeholder="sk-..."
                   value={openaiKey}
