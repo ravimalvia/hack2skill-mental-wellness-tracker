@@ -80,7 +80,7 @@ How are you holding up today? What has been on your mind?`
       
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
     } catch (err) {
-      console.error(err);
+      console.error('Coach sendMessage error:', err);
       setMessages((prev) => [
         ...prev,
         { role: 'assistant', content: "I apologize, my systems took a bit long to respond. Take a deep breath. Try to shrink your timeline and focus on one simple step today." }

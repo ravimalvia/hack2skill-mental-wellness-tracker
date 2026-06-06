@@ -10,7 +10,7 @@ import {
   ChevronUp
 } from 'lucide-react';
 import { MindMateDB, JournalEntry, UserProfile } from '../../utils/db';
-import { SentimentAnalyzer } from '../../utils/sentiment';
+import { SentimentAnalyzer, SentimentAnalysisResult } from '../../utils/sentiment';
 
 const SENTIMENT_LABELS: Record<string, { bg: string; label: string; emoji: string }> = {
   positive: { bg: 'bg-green-100 dark:bg-green-950/40 text-green-700 dark:text-green-400', label: 'Positive / Achievement', emoji: '😊' },
@@ -62,7 +62,7 @@ export default function Journal() {
       return;
     }
 
-    let sentimentVal: any = 'neutral';
+    let sentimentVal: SentimentAnalysisResult['sentiment'] = 'neutral';
     let emotionVal = 'Balanced / Reflective';
     let triggersVal: string[] = [];
     let responseVal = '';

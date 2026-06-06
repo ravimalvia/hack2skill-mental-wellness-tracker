@@ -1,5 +1,20 @@
 import { NextResponse } from 'next/server';
 
+/** Shape of a single chat message from the client. */
+interface ChatMessage {
+  role: 'user' | 'assistant' | 'model';
+  content: string;
+}
+
+/** Payload expected in the POST body. */
+interface CoachRequestBody {
+  history: ChatMessage[];
+  userMessage: string;
+  examName?: string;
+  customGeminiKey?: string;
+  customOpenaiKey?: string;
+}
+
 const SYSTEM_PROMPT = `
 You are Manas, a calm, wise, and empathetic senior academic mentor for students preparing for competitive exams (NEET, JEE, UPSC, GATE, etc.) and board exams. 
 Your tone is grounding, practical, non-judgmental, and supportive. You sound like a caring older sibling or a calm mentor who has been through these exact struggles.
@@ -11,18 +26,28 @@ Your tone is grounding, practical, non-judgmental, and supportive. You sound lik
 Keep responses concise, warm, and highly structured (use short paragraphs or bullet points).
 `;
 
+/** Maximum allowed characters for user input (DoS mitigation). */
+const MAX_MSG_LENGTH = 5_000;
+const MAX_EXAM_LENGTH = 50;
+const MAX_ROLE_LENGTH = 20;
+
 export async function POST(request: Request) {
   try {
-    const { history, userMessage, examName, customGeminiKey, customOpenaiKey } = await request.json();
+    const body = (await request.json()) as CoachRequestBody;
+    const { history, userMessage, examName, customGeminiKey, customOpenaiKey } = body;
 
     // 1. Validate parameter types and presence
     if (typeof userMessage !== 'string' || !Array.isArray(history)) {
-      return NextResponse.json({ success: false, error: 'Invalid payload structure' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: 'Invalid payload structure' },
+        { status: 400 },
+      );
     }
 
     // 2. Enforce strict input truncation (Mitigate Denial of Service / buffer strains)
-    const sanitizedMsg = userMessage.slice(0, 5000);
-    const sanitizedExam = typeof examName === 'string' ? examName.slice(0, 50) : 'your exams';
+    const sanitizedMsg = userMessage.slice(0, MAX_MSG_LENGTH);
+    const sanitizedExam =
+      typeof examName === 'string' ? examName.slice(0, MAX_EXAM_LENGTH) : 'your exams';
 
     // 3. Prioritize user custom keys, fall back to secure server-side environment variables
     const geminiKey = customGeminiKey || process.env.GEMINI_API_KEY || '';
@@ -31,9 +56,9 @@ export async function POST(request: Request) {
     // --- Gemini Call Handler ---
     if (geminiKey) {
       try {
-        const formattedHistory = history.map((msg: any) => ({
+        const formattedHistory = history.map((msg: ChatMessage) => ({
           role: msg.role === 'user' ? 'user' : 'model',
-          parts: [{ text: String(msg.content).slice(0, 5000) }],
+          parts: [{ text: String(msg.content).slice(0, MAX_MSG_LENGTH) }],
         }));
 
         const response = await fetch(
@@ -45,11 +70,19 @@ export async function POST(request: Request) {
               contents: [
                 {
                   role: 'user',
-                  parts: [{ text: `System context: ${SYSTEM_PROMPT}\nStudent Profile: Prep Target is ${sanitizedExam}.\n\nHello, mentor.` }],
+                  parts: [
+                    {
+                      text: `System context: ${SYSTEM_PROMPT}\nStudent Profile: Prep Target is ${sanitizedExam}.\n\nHello, mentor.`,
+                    },
+                  ],
                 },
                 {
                   role: 'model',
-                  parts: [{ text: `Understood. I will act as a calm, wise senior mentor. I will support the student preparing for ${sanitizedExam}. How can I support you today?` }],
+                  parts: [
+                    {
+                      text: `Understood. I will act as a calm, wise senior mentor. I will support the student preparing for ${sanitizedExam}. How can I support you today?`,
+                    },
+                  ],
                 },
                 ...formattedHistory,
                 {
@@ -62,11 +95,11 @@ export async function POST(request: Request) {
                 temperature: 0.7,
               },
             }),
-          }
+          },
         );
 
         const resJson = await response.json();
-        const text = resJson?.candidates?.[0]?.content?.parts?.[0]?.text;
+        const text = resJson?.candidates?.[0]?.content?.parts?.[0]?.text as string | undefined;
         if (text) {
           return NextResponse.json({ success: true, text: text.trim() });
         }
@@ -87,8 +120,14 @@ export async function POST(request: Request) {
           body: JSON.stringify({
             model: 'gpt-4o-mini',
             messages: [
-              { role: 'system', content: SYSTEM_PROMPT + `\nStudent profile: Target is ${sanitizedExam}.` },
-              ...history.map((m: any) => ({ role: String(m.role).slice(0, 20), content: String(m.content).slice(0, 5000) })),
+              {
+                role: 'system',
+                content: SYSTEM_PROMPT + `\nStudent profile: Target is ${sanitizedExam}.`,
+              },
+              ...history.map((m: ChatMessage) => ({
+                role: String(m.role).slice(0, MAX_ROLE_LENGTH),
+                content: String(m.content).slice(0, MAX_MSG_LENGTH),
+              })),
               { role: 'user', content: sanitizedMsg },
             ],
             max_tokens: 350,
@@ -97,7 +136,7 @@ export async function POST(request: Request) {
         });
 
         const resJson = await response.json();
-        const text = resJson?.choices?.[0]?.message?.content;
+        const text = resJson?.choices?.[0]?.message?.content as string | undefined;
         if (text) {
           return NextResponse.json({ success: true, text: text.trim() });
         }
@@ -106,7 +145,10 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ success: false, error: 'No API configuration active or call failed' });
+    return NextResponse.json({
+      success: false,
+      error: 'No API configuration active or call failed',
+    });
   } catch (err) {
     console.error('General route handler exception:', err);
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
