@@ -1,4 +1,4 @@
-// Client-side local database manager for MindMate using LocalStorage
+// Client-side local database manager for Manas using LocalStorage
 
 export interface UserProfile {
   name: string;

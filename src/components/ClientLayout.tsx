@@ -89,7 +89,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       openai: openaiKey.trim() || undefined
     });
     setShowSettings(false);
-    alert('API Keys Saved Successfully! MindMate will now prioritize your custom keys for AI analysis and coaching.');
+    alert('API Keys Saved Successfully! Manas will now prioritize your custom keys for AI analysis and coaching.');
   };
 
   // Reset Application Data
@@ -150,7 +150,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-950/50 text-indigo-500 rounded-2xl flex items-center justify-center font-display text-3xl shadow-inner animate-pulse">
               🧠
             </div>
-            <h1 className="text-2xl font-bold font-display text-slate-800 dark:text-white mt-2">Welcome to MindMate</h1>
+            <h1 className="text-2xl font-bold font-display text-slate-800 dark:text-white mt-2">Welcome to Manas</h1>
             <p className="text-sm text-slate-500 dark:text-slate-400">
               Your empathetic wellness companion for academic stress management. Let's create your guest profile.
             </p>
@@ -212,7 +212,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <header className="md:hidden flex items-center justify-between px-4 py-3 bg-white dark:bg-[#0f1524] border-b border-slate-200 dark:border-slate-800 shadow-sm z-30">
         <Link href="/dashboard" className="flex items-center gap-2">
           <span className="text-2xl">🧠</span>
-          <span className="font-bold text-lg font-display tracking-tight bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">MindMate</span>
+          <span className="font-bold text-lg font-display tracking-tight bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">Manas</span>
         </Link>
         <div className="flex items-center gap-3">
           <button 
@@ -245,7 +245,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             <div className="w-9 h-9 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-display text-lg font-bold shadow-md shadow-indigo-600/20">
               M
             </div>
-            <span className="font-bold text-xl font-display tracking-tight bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">MindMate</span>
+            <span className="font-bold text-xl font-display tracking-tight bg-gradient-to-r from-indigo-500 to-violet-500 bg-clip-text text-transparent">Manas</span>
           </Link>
           <button onClick={() => setSidebarOpen(false)} className="md:hidden p-1 text-slate-500">
             <X className="w-5 h-5" />

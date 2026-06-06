@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { MindMateDB, DailyEntry, UserProfile, JournalEntry } from './db';
+import { MindMateDB, DailyEntry, UserProfile } from './db';
 
 // Mock window and localStorage for testing
 const localStorageStore: Record<string, string> = {};

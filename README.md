@@ -1,4 +1,4 @@
-# MindMate – AI Mental Wellness Tracker for Students
+# Manas – AI Mental Wellness Tracker for Students
 
 Empathetic wellness tracker and mentor tailored for competitive exam students (JEE, NEET, UPSC, boards).
 

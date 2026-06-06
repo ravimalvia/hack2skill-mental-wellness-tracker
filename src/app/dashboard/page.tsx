@@ -441,7 +441,7 @@ export default function Dashboard() {
             {quickJournalResponse && (
               <div className="p-4 bg-indigo-500/5 dark:bg-indigo-950/20 border border-indigo-500/10 rounded-xl flex flex-col gap-2">
                 <div className="flex justify-between items-center text-[10px] font-bold">
-                  <span className="text-indigo-500">MindMate AI Mentor reply</span>
+                  <span className="text-indigo-500">Manas AI Mentor reply</span>
                   <span className="px-2 py-0.5 bg-indigo-500/15 text-indigo-500 rounded-full uppercase tracking-wider">
                     {quickJournalSentiment}
                   </span>

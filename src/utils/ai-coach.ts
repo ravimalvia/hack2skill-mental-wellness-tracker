@@ -1,4 +1,4 @@
-// AI Wellness Coach personality engine for MindMate
+// AI Wellness Coach personality engine for Manas
 import { MindMateDB, UserProfile } from './db';
 
 export interface ChatMessage {
@@ -57,7 +57,7 @@ If you are feeling burned out right now, close your books. Go drink a large glas
   },
   {
     keywords: ['hello', 'hi', 'hey', 'who are you', 'help'],
-    response: `Hello! I am MindMate, your senior mentor. I'm here to listen, help you manage exam stress, and give you practical tools to stay healthy and focused. 
+    response: `Hello! I am Manas, your senior mentor. I'm here to listen, help you manage exam stress, and give you practical tools to stay healthy and focused. 
 
 Preparing for exams like {EXAM} can get incredibly lonely and stressful. You can talk to me about:
 • Exam anxiety and fear of failure

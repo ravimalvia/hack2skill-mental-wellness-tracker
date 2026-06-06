@@ -1,4 +1,4 @@
-// Local sentiment analysis, trigger detection, and crisis flagging engine for MindMate
+// Local sentiment analysis, trigger detection, and crisis flagging engine for Manas
 
 export interface SentimentAnalysisResult {
   sentiment: 'positive' | 'neutral' | 'negative' | 'anxious' | 'stressed' | 'burned_out';

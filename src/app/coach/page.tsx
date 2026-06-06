@@ -33,7 +33,7 @@ export default function Coach() {
     setMessages([
       {
         role: 'assistant',
-        content: `Hello there. I am MindMate, your senior mentor. I'm here to listen, share practical study advice, and help you keep your well-being in check. 
+        content: `Hello there. I am Manas, your senior mentor. I'm here to listen, share practical study advice, and help you keep your well-being in check. 
 
 Competitive preparation is a massive emotional test. You can talk to me about exam anxiety, concentration blocks, sleep fatigue, or pressure from home.
 
@@ -120,7 +120,7 @@ How are you holding up today? What has been on your mind?`
           <div className="flex items-center gap-2">
             <span className="text-xl">🧘</span>
             <div>
-              <h3 className="text-xs font-extrabold text-slate-850 dark:text-white leading-none">MindMate Wellness Coach</h3>
+              <h3 className="text-xs font-extrabold text-slate-850 dark:text-white leading-none">Manas Wellness Coach</h3>
               <span className="text-[9px] text-slate-400">Offline Senior Mentor Personality Active</span>
             </div>
           </div>

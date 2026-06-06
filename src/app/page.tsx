@@ -22,7 +22,7 @@ export default function LandingPage() {
   const faqs = [
     {
       q: "Is my journal text private?",
-      a: "Yes, completely. MindMate values your privacy above all else. Your daily journal entries, check-in data, and mental analytics are stored directly inside your browser's local storage. No data is sent to external servers unless you choose to configure your own private API keys."
+      a: "Yes, completely. Manas values your privacy above all else. Your daily journal entries, check-in data, and mental analytics are stored directly inside your browser's local storage. No data is sent to external servers unless you choose to configure your own private API keys."
     },
     {
       q: "How does the AI Wellness Coach work?",
@@ -30,11 +30,11 @@ export default function LandingPage() {
     },
     {
       q: "What is the 'Mental Weather Forecast'?",
-      a: "It's a unique predictive feature. MindMate analyzes your logged sleep, study hours, and mood trends over the past week to forecast tomorrow's likely stress risk (e.g., 🌤 Calm Day, ⛅ Moderate Stress, 🌧 High Anxiety). It then gives you actionable recommendations like sleeping earlier or doing a breathing exercise."
+      a: "It's a unique predictive feature. Manas analyzes your logged sleep, study hours, and mood trends over the past week to forecast tomorrow's likely stress risk (e.g., 🌤 Calm Day, ⛅ Moderate Stress, 🌧 High Anxiety). It then gives you actionable recommendations like sleeping earlier or doing a breathing exercise."
     },
     {
       q: "Does this app replace professional mental health therapy?",
-      a: "No. MindMate is a peer-like supportive companion designed to help manage daily academic stress, burnout, and habits. It does not diagnose mental conditions or offer medical treatments. If you are experiencing severe distress, please use the red 'Emergency Support' panel to connect with certified professional hotlines."
+      a: "No. Manas is a peer-like supportive companion designed to help manage daily academic stress, burnout, and habits. It does not diagnose mental conditions or offer medical treatments. If you are experiencing severe distress, please use the red 'Emergency Support' panel to connect with certified professional hotlines."
     }
   ];
 
@@ -50,7 +50,7 @@ export default function LandingPage() {
         <div className="flex items-center gap-2.5">
           <span className="text-3xl">🧠</span>
           <span className="font-bold text-2xl font-display tracking-tight bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
-            MindMate
+            Manas
           </span>
         </div>
         <div className="flex items-center gap-4">
@@ -78,7 +78,7 @@ export default function LandingPage() {
         </h1>
         
         <p className="mt-6 text-base md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed">
-          Preparing for competitive exams like JEE, NEET, UPSC, GATE, or Board Exams is a massive emotional marathon. MindMate helps you track moods, predict burnout, identify triggers, and cope with exam anxiety.
+          Preparing for competitive exams like JEE, NEET, UPSC, GATE, or Board Exams is a massive emotional marathon. Manas helps you track moods, predict burnout, identify triggers, and cope with exam anxiety.
         </p>
 
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
@@ -106,7 +106,7 @@ export default function LandingPage() {
                 <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-                <span className="ml-2 font-display text-slate-500 dark:text-slate-300">MindMate Student Dashboard</span>
+                <span className="ml-2 font-display text-slate-500 dark:text-slate-300">Manas Student Dashboard</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="flex items-center gap-0.5">🔥 5 Day Streak</span>
@@ -145,7 +145,7 @@ export default function LandingPage() {
                 <div className="p-4 bg-gradient-to-br from-indigo-500 to-violet-600 text-white rounded-xl shadow-md flex flex-col gap-2 justify-between">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-100">AI Wellness Coach</span>
                   <p className="text-xs italic font-medium leading-relaxed">"You sleep less on the nights before mock exams. Try setting a hard shutdown time at 11 PM."</p>
-                  <span className="text-[10px] font-bold text-right text-indigo-200">— MindMate Mentor</span>
+                  <span className="text-[10px] font-bold text-right text-indigo-200">— Manas Mentor</span>
                 </div>
                 
                 <div className="p-4 bg-white dark:bg-[#121824] rounded-xl border border-slate-200/40 dark:border-slate-800/80 shadow-sm flex flex-col gap-3">
@@ -184,7 +184,7 @@ export default function LandingPage() {
             </div>
             <h3 className="text-lg font-bold font-display text-slate-850 dark:text-white">Mood & Stress Tracking</h3>
             <p className="mt-2 text-xs md:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-              Log your mood, sleep, study hours, and exercise in seconds. MindMate calculates your daily Stress and Wellness scores to find your health threshold.
+              Log your mood, sleep, study hours, and exercise in seconds. Manas calculates your daily Stress and Wellness scores to find your health threshold.
             </p>
           </div>
 
@@ -260,7 +260,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="p-6 bg-white dark:bg-[#121824] rounded-2xl border border-slate-200/30 dark:border-slate-850 shadow-sm leading-relaxed">
               <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm italic">
-                "During my NEET preparation, mock score anxiety was paralyzing. I would study 12 hours straight but score poorly due to panic. Using MindMate's breathing tool before entering mock tests and using the AI Journal to vent helped me reframe mock exams as diagnostic diagnostics, not final judgment."
+                "During my NEET preparation, mock score anxiety was paralyzing. I would study 12 hours straight but score poorly due to panic. Using Manas's breathing tool before entering mock tests and using the AI Journal to vent helped me reframe mock exams as diagnostic diagnostics, not final judgment."
               </p>
               <div className="mt-4 flex items-center gap-3">
                 <div className="w-9 h-9 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold text-xs">
@@ -335,7 +335,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto px-6 flex flex-col items-center gap-4">
           <div className="flex items-center gap-2">
             <span className="text-xl">🧠</span>
-            <span className="font-bold font-display text-slate-600 dark:text-slate-300">MindMate</span>
+            <span className="font-bold font-display text-slate-600 dark:text-slate-300">Manas</span>
           </div>
           <p className="max-w-md leading-relaxed">
             Designed to reassure and support students through academic stress. Keep study consistent, sleep healthy, and celebrate your persistence.
@@ -346,7 +346,7 @@ export default function LandingPage() {
             <span>for students worldwide</span>
           </div>
           <div className="h-[1px] w-32 bg-slate-100 dark:bg-slate-800/80 my-2"></div>
-          <p className="text-[10px] text-slate-500">&copy; {new Date().getFullYear()} MindMate. All Rights Reserved. Saved Locally.</p>
+          <p className="text-[10px] text-slate-500">&copy; {new Date().getFullYear()} Manas. All Rights Reserved. Saved Locally.</p>
         </div>
       </footer>
 

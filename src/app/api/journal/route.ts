@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 const SYSTEM_PROMPT = `
-You are an expert student counselor and emotional journal analyzer for MindMate.
+You are an expert student counselor and emotional journal analyzer for Manas.
 Your task is to analyze the student's daily journal entry.
 Identify:
 1. Sentiment: strictly one of "positive", "neutral", "negative", "anxious", "stressed", "burned_out".
